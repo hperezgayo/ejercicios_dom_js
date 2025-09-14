@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuerySelector Demo</title>
+</head>
+<body>
+  <button class="showme">Pillame!</button>
+  <h1 id="pillado">Aqui estoy 8)</h1>
+
+  <p>Soy el power ranger Amarillo</p>
+  <p>Soy el power ranger Rojo</p>
+  <p>Soy el power ranger Azul</p>
+  <p>Soy el power ranger Negro</p>
+
+  <h4 class="pokemon">Bulbasaur</h4>
+  <h4 class="pokemon">Charmander</h4>
+  <h4 class="pokemon">Pikachu</h4>
+  <h4 class="pokemon">Squirtle</h4>
+
+  <span data-function="testMe">Batman</span>
+  <span data-function="testMe">Robin</span>
+  <span data-function="testMe">Rick</span>
+  <span data-function="testMe">Morty</span>
+
+  <script>
+    console.log('1.1 Botón .showme:', document.querySelector('.showme'));
+
+    console.log('1.2 h1 #pillado:', document.querySelector('#pillado'));
+
+    console.log('1.3 Todos los <p>:', document.querySelectorAll('p'));
+
+    console.log('1.4 .pokemon:', document.querySelectorAll('.pokemon'));
+
+    const testMeAll = document.querySelectorAll('[data-function="testMe"]');
+    console.log('1.5 [data-function="testMe"]:', testMeAll);
+
+    console.log('1.6 3º [data-function="testMe"]:', testMeAll[2], '-', testMeAll[2]?.textContent);
+  </script>
+</body>
+</html>

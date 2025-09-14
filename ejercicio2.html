@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ejercicio 2</title>
+</head>
+<body>
+  <h2 class="fn-insert-here"></h2>
+  <p class="fn-remove-me">Eliminame!</p>
+  <p>No me elimines!</p>
+  <p>No me elimines!</p>
+  <p class="fn-remove-me">Eliminame!</p>
+  <p>No me elimines!</p>
+  <p class="fn-remove-me">Eliminame!</p>
+  <p class="fn-remove-me">Eliminame!</p>
+  <p>No me elimines!</p>
+  <div></div><div></div>
+  <div class="fn-insert-here"></div>
+  <div class="fn-insert-here"></div>
+
+  <script>
+    const divVacio = document.createElement('div');
+    document.body.appendChild(divVacio);
+    console.log('2.1 Div vacío insertado:', divVacio);
+
+    const divConP = document.createElement('div');
+    const pInside = document.createElement('p');
+    pInside.textContent = 'P dentro de un DIV (2.2)';
+    divConP.appendChild(pInside);
+    document.body.appendChild(divConP);
+    console.log('2.2 Div con p insertado:', divConP);
+
+    const divSeisP = document.createElement('div');
+    for (let i = 1; i <= 6; i++) {
+      const p = document.createElement('p');
+      p.textContent = `Párrafo ${i} (2.3)`;
+      divSeisP.appendChild(p);
+    }
+    document.body.appendChild(divSeisP);
+    console.log('2.3 Div con 6 p insertado:', divSeisP);
+
+    const pDinamico = document.createElement('p');
+    pDinamico.textContent = 'Soy dinámico!';
+    document.body.appendChild(pDinamico);
+    console.log('2.4 P dinámico insertado:', pDinamico);
+
+    const h2 = document.querySelector('h2.fn-insert-here');
+    if (h2) h2.textContent = 'Wubba Lubba dub dub';
+    console.log('2.5 h2 actualizado:', h2?.textContent);
+
+    const apps = ['Facebook', 'Netflix', 'Instagram', 'Snapchat', 'Twitter'];
+    const ul = document.createElement('ul');
+    apps.forEach(app => {
+      const li = document.createElement('li');
+      li.textContent = app;
+      ul.appendChild(li);
+    });
+    document.body.appendChild(ul);
+    console.log('2.6 Lista de apps creada:', ul);
+
+    document.querySelectorAll('.fn-remove-me').forEach(node => node.remove());
+    console.log('2.7 Eliminados .fn-remove-me');
+
+    const primerDivInsertHere = document.querySelector('div.fn-insert-here');
+    const todosLosDivs = Array.from(document.querySelectorAll('div'));
+    const idxPrimerInsertHere = todosLosDivs.indexOf(primerDivInsertHere);
+    const segundoDivOriginal = todosLosDivs[idxPrimerInsertHere - 1];
+    const pMedio = document.createElement('p');
+    pMedio.textContent = 'Voy en medio!';
+    document.body.insertBefore(pMedio, segundoDivOriginal);
+    console.log('2.8 P entre los dos primeros div insertado:', pMedio);
+
+    // ========= 2.9 Inserta 'Voy dentro!' en todos los div.fn-insert-here =========
+    document.querySelectorAll('div.fn-insert-here').forEach(div => {
+      const p = document.createElement('p');
+      p.textContent = 'Voy dentro!';
+      div.appendChild(p);
+    });
+    console.log('2.9 P dentro de cada div.fn-insert-here insertado');
+  </script>
+
+</html>

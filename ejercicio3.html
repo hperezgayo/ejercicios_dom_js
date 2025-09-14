@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ejercicio 3 - DOM</title>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 16px; }
+    #cards-wrapper { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 16px; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 12px; }
+    .card h4 { margin: 0 0 8px; }
+    .toolbar { margin: 12px 0; display: flex; gap: 8px; }
+    button { cursor: pointer; padding: 6px 10px; border-radius: 8px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <p class="fn-remove-me">Bye bye</p>
+  <div data-function="printHere"></div>
+
+  <script>
+    const countries = ['Japón', 'Nicaragua', 'Suiza', 'Australia', 'Venezuela'];
+    const ulCountries = document.createElement('ul');
+    countries.forEach(country => {
+      const li = document.createElement('li');
+      li.textContent = country;
+      ulCountries.appendChild(li);
+    });
+    document.body.appendChild(ulCountries);
+
+    document.querySelector('.fn-remove-me')?.remove();
+
+    const cars = ['Mazda 6', 'Ford fiesta', 'Audi A4', 'Toyota corola'];
+    const printHere = document.querySelector('[data-function="printHere"]');
+    if (printHere) {
+      const ulCars = document.createElement('ul');
+      cars.forEach(car => {
+        const li = document.createElement('li');
+        li.textContent = car;
+        ulCars.appendChild(li);
+      });
+      printHere.appendChild(ulCars);
+    }
+
+    const countriesData = [
+      { title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=1' }, 
+      { title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=2' },
+      { title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=3' },
+      { title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=4' },
+      { title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=5' }
+    ];
+
+    const toolbar = document.createElement('div');
+    toolbar.className = 'toolbar';
+    const delLastBtn = document.createElement('button');
+    delLastBtn.textContent = 'Eliminar último';
+    toolbar.appendChild(delLastBtn);
+    document.body.appendChild(toolbar);
+
+    const cardsWrapper = document.createElement('div');
+    cardsWrapper.id = 'cards-wrapper';
+    document.body.appendChild(cardsWrapper);
+
+    countriesData.forEach(({ title, imgUrl }, i) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const h4 = document.createElement('h4');
+      h4.textContent = `${title} ${i + 1}`;
+
+      const img = document.createElement('img');
+      img.src = imgUrl;
+      img.alt = `Imagen ${i + 1}`;
+
+      const delThisBtn = document.createElement('button');
+      delThisBtn.textContent = 'Eliminar este';
+      delThisBtn.addEventListener('click', () => card.remove());
+
+      card.append(h4, img, delThisBtn);
+      cardsWrapper.appendChild(card);
+    });
+
+    delLastBtn.addEventListener('click', () => {
+      const last = cardsWrapper.lastElementChild;
+      if (last) last.remove();
+    });
+  </script>
+</body>
+</html>
